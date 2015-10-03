@@ -14,3 +14,5 @@ where
 * replacement is whether or not sampling should be done with replacement or without (true/false)
 
 The output is a vector of counts where each count corresponds with the features.
+
+If you have applied a prior between 0 and 1 (not inclusive), this function treats those counts as zero.

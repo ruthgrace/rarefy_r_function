@@ -5,7 +5,7 @@
 rarefy <- function(features, counts, samples, replacement) {
   # pool has the name of each OTU duplicated as many times as the count of that OTU
   counts.no.prior <- counts
-  counts.no.prior[counts.no.prior==prior] <- 0
+  counts.no.prior[counts.no.prior < 1] <- 0
   pool <- c(1:sum(counts.no.prior))
   index <- 0
   for (i in c(1:length(features))) {
