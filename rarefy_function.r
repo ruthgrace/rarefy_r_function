@@ -4,8 +4,14 @@
 # replacement is whether or not sampling should be done with replacement or without (true/false)
 rarefy <- function(features, counts, samples, replacement) {
   # pool has the name of each OTU duplicated as many times as the count of that OTU
+  if (length(features) != length(counts)) {
+    stop(paste("Number of features and counts don't match:",length(features),"features and",length(counts),"counts"))
+  }
   counts.no.prior <- counts
   counts.no.prior[counts.no.prior < 1] <- 0
+  if (replacement==FALSE and samples > sum(counts.no.prior)) {
+    stop(paste("Number of samples cannot be greater than the sum of counts: ",samples,"samples and",sum(counts.no.prior),"counts"))
+  }
   pool <- c(1:sum(counts.no.prior))
   index <- 0
   for (i in c(1:length(features))) {
